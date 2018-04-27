@@ -17,6 +17,7 @@ public class BookTest {
     public void initialize() {
         book = new Book(name, author, year, checked);
     }
+
     @Test
     public void bookName() {
         assertEquals(name, book.getName());
