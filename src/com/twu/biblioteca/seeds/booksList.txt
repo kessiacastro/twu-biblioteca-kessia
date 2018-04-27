@@ -1,0 +1,5 @@
+OO Solid para Ninjas; Mauricio Aniche; 2016; true;
+TDD com Java; Mauricio Aniche; 2017; false;
+Java e OO; Rodrigo Turini; 2015; false;
+Spring MVC; Alberto Souza; 2018; true;
+Design Patterns com Java; 2017; true;
