@@ -4,35 +4,35 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import com.twu.biblioteca.view.Menu;
+import com.twu.biblioteca.controller.StartApp;
 
 
 public class InputValidatorTest {
 
-    Menu menu;
+    StartApp startApp;
 
     @Before
     public void initialize() {
-        menu = new Menu();
+        startApp = new StartApp();
     }
 
     @Test
     public void menuInputIsValid() {
-        assertEquals(true, InputValidator.validadeMenuInput("1", menu.getOptions()));
+        assertEquals(true, InputValidator.validadeMenuInput("1", startApp.getOptions()));
     }
 
     @Test
     public void menuInputIsNotValid() {
-        assertEquals(false, InputValidator.validadeMenuInput("Not Valid", menu.getOptions()));
+        assertEquals(false, InputValidator.validadeMenuInput("Not Valid", startApp.getOptions()));
     }
 
     @Test
     public void menuInputIsEmpty() {
-        assertEquals(false, InputValidator.validadeMenuInput("", menu.getOptions()));
+        assertEquals(false, InputValidator.validadeMenuInput("", startApp.getOptions()));
     }
 
     @Test
     public void menuInputIsOutOfOptions() {
-        assertEquals(false, InputValidator.validadeMenuInput("10", menu.getOptions()));
+        assertEquals(false, InputValidator.validadeMenuInput("10", startApp.getOptions()));
     }
 }
