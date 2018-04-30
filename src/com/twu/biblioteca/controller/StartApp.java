@@ -53,6 +53,14 @@ public class StartApp {
                 checkoutBook();
             }
         });
+
+        this.options.put("3", "Return a book");
+        this.commands.put("3", new Runnable() {
+            @Override
+            public void run() {
+                returnBook();
+            }
+        });
     }
 
     public void printWelcomeMessage() {
@@ -97,7 +105,7 @@ public class StartApp {
     }
 
     public void chooseBook() {
-        System.out.println("Type the book code for checkout: ");
+        System.out.println("Type the book code: ");
     }
 
     public void showMenu() {
@@ -140,5 +148,30 @@ public class StartApp {
                 System.out.println("That book is not available.\n");
             }
         }
+    }
+
+    public void returnBook() {
+        int code = -1;
+        boolean repeatMenu = true;
+        boolean validCode = false;
+        while(repeatMenu){
+            this.chooseBook();
+
+            try {
+                code = scan.nextInt();
+                validCode = code < bookslist.getBooks().size();
+            } catch (InputMismatchException e) {
+                validCode = false;
+            }
+
+            if(validCode && code >= 0) {
+                this.bookslist.getBooks().get(code).returnBook();
+                System.out.println("Thank you for returning the book.");
+                repeatMenu = false;
+            } else {
+                System.out.println("That is not a valid book to return.\n");
+            }
+        }
+
     }
 }

@@ -26,11 +26,9 @@ public class Book {
         return this.year;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
+    public boolean isChecked() { return checked; }
 
-    public void checkout() {
-        this.checked = true;
-    }
+    public void checkout() { this.checked = true; }
+
+    public void returnBook() { this.checked = false; }
 }

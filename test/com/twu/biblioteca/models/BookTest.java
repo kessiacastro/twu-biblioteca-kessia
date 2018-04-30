@@ -42,4 +42,9 @@ public class BookTest {
     public void checkoutBook() {
         book.checkout();
         assertEquals(true, book.isChecked()); }
+
+    @Test
+    public void returnBook() {
+        book.returnBook();
+        assertEquals(false, book.isChecked()); }
 }
