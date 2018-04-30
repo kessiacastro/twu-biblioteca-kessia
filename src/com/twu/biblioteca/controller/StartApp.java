@@ -118,28 +118,27 @@ public class StartApp {
     }
 
     public void checkoutBook() {
-        String code;
+        int code = -1;
         boolean repeatMenu = true;
         boolean validCode = false;
         while(repeatMenu){
             this.printBooksList(this.bookslist.getBooks());
             this.chooseBook();
-            code = scan.next();
 
-            validCode = Integer.parseInt(code) < bookslist.getBooks().size();
-            if(validCode) {
-                this.bookslist.getBooks().get(Integer.parseInt(code)).checkout();
+            try {
+                code = scan.nextInt();
+                validCode = code < bookslist.getBooks().size();
+            } catch (InputMismatchException e) {
+                validCode = false;
+            }
+
+            if(validCode && code >= 0) {
+                this.bookslist.getBooks().get(code).checkout();
+                System.out.println("Thank you! Enjoy the book.");
                 repeatMenu = false;
             } else {
-                System.out.println("Insert a valid code!\n");
+                System.out.println("That book is not available.\n");
             }
-//            isValidOption = validator.validadeMenuInput(option, this.getOptions());
-
-//            if(isValidOption) {
-//                commands.get(option).run();
-//            } else {
-//                System.out.println("Select a valid option!\n");
-//            }
         }
     }
 }
