@@ -128,7 +128,7 @@ public class StartApp {
     public void checkoutBook() {
         int code = -1;
         boolean repeatMenu = true;
-        boolean validCode = false;
+        boolean validCode;
         while(repeatMenu){
             this.printBooksList(this.bookslist.getBooks());
             this.chooseBook();
@@ -153,7 +153,7 @@ public class StartApp {
     public void returnBook() {
         int code = -1;
         boolean repeatMenu = true;
-        boolean validCode = false;
+        boolean validCode;
         while(repeatMenu){
             this.chooseBook();
 
