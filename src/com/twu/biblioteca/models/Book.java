@@ -29,4 +29,8 @@ public class Book {
     public boolean isChecked() {
         return checked;
     }
+
+    public void checkout() {
+        this.checked = true;
+    }
 }

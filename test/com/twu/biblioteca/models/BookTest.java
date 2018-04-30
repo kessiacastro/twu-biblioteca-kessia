@@ -37,4 +37,9 @@ public class BookTest {
     public void availabillity() {
         assertEquals(checked, book.isChecked());
     }
+
+    @Test
+    public void checkoutBook() {
+        book.checkout();
+        assertEquals(true, book.isChecked()); }
 }
