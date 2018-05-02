@@ -28,7 +28,14 @@ public class Book {
 
     public boolean isChecked() { return checked; }
 
-    public void checkout() { this.checked = true; }
+    public void checkout() {
+        this.checked = true;
+        System.out.println("Thank you! Enjoy the book.");
+    }
 
-    public void returnBook() { this.checked = false; }
+    public void returnBook() {
+        this.checked = false;
+        System.out.println("Thank you for returning the book.");
+
+    }
 }

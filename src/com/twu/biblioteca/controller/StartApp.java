@@ -5,6 +5,7 @@ import com.twu.biblioteca.models.Repository;
 import com.twu.biblioteca.seeds.Seed;
 import com.twu.biblioteca.validators.InputValidator;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class StartApp {
@@ -105,7 +106,7 @@ public class StartApp {
     }
 
     public void chooseBook() {
-        System.out.println("Type the book code: ");
+        System.out.println("Type the book code or 'b' for back: ");
     }
 
     public void showMenu() {
@@ -126,52 +127,51 @@ public class StartApp {
     }
 
     public void checkoutBook() {
-        int code = -1;
+        this.subMenu("checkoutBook");
+    }
+
+    public void returnBook() {
+        this.subMenu("returnBook");
+    }
+
+    public void subMenu(String action) {
         boolean repeatMenu = true;
         boolean validCode;
         while(repeatMenu){
-            this.printBooksList(this.bookslist.getBooks());
             this.chooseBook();
-
-            try {
-                code = scan.nextInt();
-                validCode = code < bookslist.getBooks().size();
-            } catch (InputMismatchException e) {
-                validCode = false;
-            }
-
-            if(validCode && code >= 0) {
-                this.bookslist.getBooks().get(code).checkout();
-                System.out.println("Thank you! Enjoy the book.");
+            String code = this.getCode();
+            if (code.equals("b")) {
                 repeatMenu = false;
             } else {
-                System.out.println("That book is not available.\n");
+                validCode = Integer.parseInt(code) < bookslist.getBooks().size();
+                if(validCode && Integer.parseInt(code) >= 0) {
+                    Book book = this.bookslist.getBooks().get(Integer.parseInt(code));
+                    if (action == "returnBook") {
+                        if(book.isChecked()) {
+                            book.returnBook();
+                            repeatMenu = false;
+                        } else {
+                            System.out.println("This book was not checked. Try another one.");
+                        }
+                    }
+                    if (action == "checkoutBook") {
+                        if (!book.isChecked()) {
+                            book.checkout();
+                            repeatMenu = false;
+                        } else {
+                            System.out.println("This book is already checked. Try another one.");
+                        }
+                    }
+                } else {
+                    System.out.println("That is not a valid code.\n");
+                }
             }
         }
     }
 
-    public void returnBook() {
-        int code = -1;
-        boolean repeatMenu = true;
-        boolean validCode;
-        while(repeatMenu){
-            this.chooseBook();
-
-            try {
-                code = scan.nextInt();
-                validCode = code < bookslist.getBooks().size();
-            } catch (InputMismatchException e) {
-                validCode = false;
-            }
-
-            if(validCode && code >= 0) {
-                this.bookslist.getBooks().get(code).returnBook();
-                System.out.println("Thank you for returning the book.");
-                repeatMenu = false;
-            } else {
-                System.out.println("That is not a valid book to return.\n");
-            }
-        }
-
+    public String getCode () {
+        String code;
+        code = scan.next();
+        return code;
     }
 }
