@@ -14,12 +14,15 @@ public class RepositoryTest {
     @Before
     public void initialize() {
         seed = new Seed();
-        repo = new Repository(seed.getBooksList());
+        repo = new Repository(seed.getBooksList(), seed.getMoviesList());
     }
 
     @Test
-    public void repositoryNotEmpty() {
+    public void repositoryBooksNotEmpty() {
         assertEquals(5, repo.getBooks().size());
     }
+
+    @Test
+    public void repositoryMoviesNotEmpty() { assertEquals(5, repo.getBooks().size()); }
 
 }

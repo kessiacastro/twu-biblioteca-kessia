@@ -17,7 +17,7 @@ public class StartApp {
     private Map<String, String> options = new HashMap<String, String>();
     Map<String, Runnable> commands = new HashMap<String, Runnable>();
     Seed seed = new Seed();
-    private Repository bookslist= new Repository(seed.getBooksList());
+    private Repository bookslist= new Repository(seed.getBooksList(), seed.getMoviesList());
     private InputValidator validator;
     boolean isValidOption = false;
     Scanner scan;

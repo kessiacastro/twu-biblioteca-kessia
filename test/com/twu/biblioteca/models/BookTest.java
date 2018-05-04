@@ -34,7 +34,7 @@ public class BookTest {
     }
 
     @Test
-    public void availabillity() {
+    public void availability() {
         assertEquals(checked, book.isChecked());
     }
 
