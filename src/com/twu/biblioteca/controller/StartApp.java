@@ -1,6 +1,7 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.models.Book;
+import com.twu.biblioteca.models.Movie;
 import com.twu.biblioteca.models.Repository;
 import com.twu.biblioteca.seeds.Seed;
 import com.twu.biblioteca.validators.InputValidator;
@@ -12,8 +13,10 @@ public class StartApp {
 
     private String welcomeMessage = "| Welcome to TWU-Library |%n";
     private String welcomeLines = "+------------------------+%n";
-    private String listLines = "+-----+--------------------------+-----------------+------+%n";
-    private String listColumnNames = "| Cod | Book name                | Author name     | Year |%n";
+    private String booksListLines = "+-----+--------------------------+-----------------+------+%n";
+    private String moviesListLines = "+-----+--------------------------+-----------------+-------+-----+%n";
+    private String booksListColumnNames = "| Cod | Book name                | Author name     | Year |%n";
+    private String moviesListColumnNames = "| Cod | Movie title              | Director        | Year | Rate |%n";
     private Map<String, String> options = new HashMap<String, String>();
     Map<String, Runnable> commands = new HashMap<String, Runnable>();
     Seed seed = new Seed();
@@ -47,6 +50,7 @@ public class StartApp {
             }
         });
 
+
         this.options.put("2", "Checkout book");
         this.commands.put("2", new Runnable() {
             @Override
@@ -62,6 +66,14 @@ public class StartApp {
                 returnBook();
             }
         });
+
+        this.options.put("4", "List all movies");
+        this.commands.put("4", new Runnable() {
+            @Override
+            public void run() {
+                printMoviesList(bookslist.getMovies());
+            }
+        });
     }
 
     public void printWelcomeMessage() {
@@ -75,7 +87,7 @@ public class StartApp {
 
     public void printBooksList(ArrayList<Book> booksList) {
         String leftAlignFormat = "| %-3s | %-24s | %-15s | %-4s |%n";
-        String columns = this.listLines + this.listColumnNames + this.listLines;
+        String columns = this.booksListLines + this.booksListColumnNames + this.booksListLines;
 
         for (int i=0; i < booksList.size(); i++) {
             Book book = booksList.get(i);
@@ -87,7 +99,25 @@ public class StartApp {
             }
         }
 
-        columns += this.listLines;
+        columns += this.booksListLines;
+        System.out.format(columns);
+    }
+
+    public void printMoviesList(ArrayList<Movie> moviesList) {
+        String leftAlignFormat = "| %-3s | %-24s | %-15s | %-4s | %-4s |%n";
+        String columns = this.moviesListLines + this.moviesListColumnNames + this.moviesListLines;
+
+        for (int i=0; i < moviesList.size(); i++) {
+            Movie movie = moviesList.get(i);
+            if (!movie.isChecked()) {
+                StringBuilder line = new StringBuilder();
+                String formattedString = String.format(leftAlignFormat, Integer.toString(i), movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
+                line.append(formattedString);
+                columns += line;
+            }
+        }
+
+        columns += this.moviesListLines;
         System.out.format(columns);
     }
 
