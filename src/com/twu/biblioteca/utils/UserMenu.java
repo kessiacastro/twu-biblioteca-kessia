@@ -17,6 +17,8 @@ public class UserMenu {
     private String moviesListLines ="+-----+--------------------------+-----------------+------+------+%n";
     private String booksListColumnNames = "| Cod | Book name                | Author name     | Year |%n";
     private String moviesListColumnNames = "| Cod | Movie title              | Director        | Year | Rate |%n";
+    private String userInfoLines = "+------+--------------------------+-----------------+-----------+%n";
+    private String userInfo = "| Code | Name                     | Email           | Phone     |%n";
     private Repository repository;
     Scanner scan = new Scanner(System.in);
     private InputValidator validator = new InputValidator();
@@ -77,6 +79,14 @@ public class UserMenu {
                 checkoutMovie();
             }
         });
+
+        this.options.put("6", "User Info");
+        this.commands.put("6", new Runnable() {
+            @Override
+            public void run() {
+                showUserInfo();
+            }
+        });
     }
 
     public void printBooksList(ArrayList<Book> booksList) {
@@ -112,6 +122,17 @@ public class UserMenu {
         }
 
         columns += this.moviesListLines;
+        System.out.format(columns);
+    }
+
+    public void showUserInfo() {
+        String leftAlignFormat = "| %-4s | %-24s | %-15s | %-8s |%n";
+        String columns = this.userInfoLines + this.userInfo + this.userInfoLines;
+        StringBuilder line = new StringBuilder();
+        String formattedString = String.format(leftAlignFormat, this.user.getCode(), this.user.getName(), this.user.getEmail(), this.user.getPhone());
+        line.append(formattedString);
+        columns += line;
+        columns += this.userInfoLines;
         System.out.format(columns);
     }
 
