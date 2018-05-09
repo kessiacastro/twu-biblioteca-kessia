@@ -6,9 +6,12 @@ import java.util.ArrayList;
 
 public class Auth {
 
-    public static People validateUser(String email, String password, ArrayList<People> userList) {
+    public People loggedUser = null;
+
+    public People validateUser(String code, String password, ArrayList<People> userList) {
         for(People user : userList) {
-            if(user.getEmail().equals(email) && user.getPassword().equals(password)) {
+            if(user.getCode().equals(code) && user.getPassword().equals(password)) {
+                this.loggedUser = user;
                 return user;
             }
         }

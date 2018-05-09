@@ -37,7 +37,8 @@ public class Seed {
 
             while (sc.hasNextLine()) {
                 String[] lineInfo = sc.nextLine().split(";");
-                Book newBook = new Book(lineInfo[0], lineInfo[1], lineInfo[2], Boolean.parseBoolean(lineInfo[3]));
+                String checked = lineInfo[3].equals("null") ? "" : lineInfo[3];
+                Book newBook = new Book(lineInfo[0], lineInfo[1], lineInfo[2], checked);
                 list.add(newBook);
             }
             sc.close();
@@ -60,7 +61,7 @@ public class Seed {
 
             while (sc.hasNextLine()) {
                 String[] lineInfo = sc.nextLine().split(";");
-                Movie newMovie = new Movie(lineInfo[0], lineInfo[1], lineInfo[2], Integer.parseInt(lineInfo[3]), Boolean.parseBoolean(lineInfo[3]));
+                Movie newMovie = new Movie(lineInfo[0], lineInfo[1], lineInfo[2], Integer.parseInt(lineInfo[3]), null);
                 list.add(newMovie);
             }
             sc.close();
@@ -83,7 +84,7 @@ public class Seed {
 
             while (sc.hasNextLine()) {
                 String[] lineInfo = sc.nextLine().split(";");
-                People newUser = new People(lineInfo[0], lineInfo[1], lineInfo[2], lineInfo[3], lineInfo[4], lineInfo[5]);
+                People newUser = new People(lineInfo[0], lineInfo[1], lineInfo[2], lineInfo[3], lineInfo[4], lineInfo[5], lineInfo[6]);
                 list.add(newUser);
             }
             sc.close();

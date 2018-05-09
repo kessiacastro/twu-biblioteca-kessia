@@ -1,5 +1,6 @@
 package com.twu.biblioteca.validators;
 
+import com.twu.biblioteca.models.People;
 import com.twu.biblioteca.models.Repository;
 import com.twu.biblioteca.seeds.Seed;
 import com.twu.biblioteca.utils.UserMenu;
@@ -15,10 +16,11 @@ public class InputValidatorTest {
     private Seed seed = new Seed();
     private UserMenu userMenu;
     private Repository repository = new Repository(seed.getBooksList(), seed.getMoviesList());
+    private People user = seed.getUsersList().get(4);
 
     @Before
     public void initialize() {
-        userMenu = new UserMenu(repository);
+        userMenu = new UserMenu(repository, user);
     }
 
     @Test

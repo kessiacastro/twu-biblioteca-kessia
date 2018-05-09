@@ -3,6 +3,7 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.models.People;
 import com.twu.biblioteca.models.Repository;
 import com.twu.biblioteca.seeds.Seed;
+import com.twu.biblioteca.utils.LibrarianMenu;
 import com.twu.biblioteca.utils.UserMenu;
 import com.twu.biblioteca.validators.Auth;
 import com.twu.biblioteca.validators.InputValidator;
@@ -16,7 +17,8 @@ public class StartApp {
     private String welcomeMessage = "| Welcome to TWU-Library |%n";
     private String welcomeLines = "+------------------------+%n";
     private Repository repository = new Repository(seed.getBooksList(), seed.getMoviesList());
-    private UserMenu usermenu = new UserMenu(repository);
+    private UserMenu usermenu;
+    private LibrarianMenu librarianMenu;
 
     Scanner scan = new Scanner(System.in);
 
@@ -26,21 +28,21 @@ public class StartApp {
     }
 
     private void showAuthMenu() {
-        String email;
+        String code;
         String password;
         boolean repeatMenu = true;
         while(repeatMenu){
-            System.out.println("Insert your username:\n");
-            email = scan.next();
+            System.out.println("Insert your library code:");
+            code = scan.next();
 
-            System.out.println("Insert your password\n");
+            System.out.println("Insert your password");
             password = scan.next();
-            People user = auth.validateUser(email, password, seed.getUsersList());
+            People user = auth.validateUser(code, password, seed.getUsersList());
             if (user == null) {
                 System.out.println("Invalid credentials!\n");
             } else {
-               this.showMenu(user.getType());
-               repeatMenu = false;
+                this.showMenu(user);
+                repeatMenu = false;
             }
         }
 
@@ -53,21 +55,16 @@ public class StartApp {
     }
 
 
-    public void showMenu(String type) {
-        System.out.println(type);
-       if (type.equals("librarian")) {
-           this.showLibrarianMenu();
+    public void showMenu(People user) {
+       if (user.getType().equals("librarian")) {
+           this.librarianMenu = new LibrarianMenu(repository, user);
+           this.librarianMenu.showMenu();
        }
 
-       if (type.equals("user")) {
+       if (user.getType().equals("user")) {
+           this.usermenu = new UserMenu(repository, user);
            this.usermenu.showMenu();
        }
-    }
-
-    private void showUserMenu() {
-    }
-
-    private void showLibrarianMenu() {
     }
 
 

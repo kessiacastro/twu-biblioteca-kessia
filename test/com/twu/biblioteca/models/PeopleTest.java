@@ -15,12 +15,13 @@ public class PeopleTest {
     private String phone = "123456789";
     private String userType = "user";
     private String librarianType = "librarian";
-    private String password = "teste";
+    private String password = "test";
+    private String code = "1234";
 
     @Before
     public void initialize() {
-       this.user = new People(name, email, address, phone, userType, password);
-       this.librarian = new People(name, email, address, phone, librarianType, password);
+       this.user = new People(name, email, address, phone, userType, password, code);
+       this.librarian = new People(name, email, address, phone, librarianType, password, code);
     }
 
     @Test
@@ -56,6 +57,11 @@ public class PeopleTest {
     @Test
     public void peoplePassword() {
         assertEquals(password, librarian.getPassword());
+    }
+
+    @Test
+    public void peopleNumber() {
+        assertEquals(code, librarian.getCode());
     }
 
 }

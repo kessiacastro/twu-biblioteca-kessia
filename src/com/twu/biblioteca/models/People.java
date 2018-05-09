@@ -8,14 +8,16 @@ public class People {
     private String phone;
     private String type;
     private String password;
+    private String code;
 
-    public People(String name, String email, String address, String phone, String type, String password) {
+    public People(String name, String email, String address, String phone, String type, String password, String code) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
         this.type = type;
         this.password = password;
+        this.code = code;
     }
 
     public String getName() {
@@ -40,5 +42,9 @@ public class People {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public String getCode() {
+        return this.code;
     }
 }

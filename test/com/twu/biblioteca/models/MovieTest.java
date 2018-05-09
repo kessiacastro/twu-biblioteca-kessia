@@ -12,11 +12,12 @@ public class MovieTest {
     private String year = "2000";
     private String director = "Fulano de Tal";
     private int rating = 0;
-    private boolean isChecked = false;
+    private String checked = null;
+    private String code = "1234";
 
     @Before
     public void initialize() {
-        movie = new Movie(name, year, director, rating, isChecked);
+        movie = new Movie(name, year, director, rating, checked);
     }
 
     @Test
@@ -41,13 +42,13 @@ public class MovieTest {
 
     @Test
     public void availability() {
-        assertEquals(isChecked, movie.isChecked());
+        assertEquals(false, movie.isChecked());
     }
 
     @Test
     public void checkoutMovie() {
-        movie.checkout();
-        assertEquals(true, movie.isChecked());
+        movie.checkout(code);
+        assertEquals(code, movie.getCode());
     }
 
     @Test

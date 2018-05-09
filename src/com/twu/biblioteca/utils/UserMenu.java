@@ -2,7 +2,9 @@ package com.twu.biblioteca.utils;
 
 import com.twu.biblioteca.models.Book;
 import com.twu.biblioteca.models.Movie;
+import com.twu.biblioteca.models.People;
 import com.twu.biblioteca.models.Repository;
+import com.twu.biblioteca.validators.Auth;
 import com.twu.biblioteca.validators.InputValidator;
 
 import java.util.*;
@@ -18,8 +20,10 @@ public class UserMenu {
     private Repository repository;
     Scanner scan = new Scanner(System.in);
     private InputValidator validator = new InputValidator();
+    private People user;
 
-    public UserMenu(Repository repository) {
+    public UserMenu(Repository repository, People user) {
+        this.user = user;
         this.populateUserMenu();
         this.repository = repository;
     }
@@ -138,7 +142,7 @@ public class UserMenu {
                     if (action.equals("checkoutMovie")) {
                         Movie movie = this.repository.getMovies().get(Integer.parseInt(code));
                         if (!movie.isChecked()) {
-                            movie.checkout();
+                            movie.checkout(this.user.getCode());
                             repeatMenu = false;
                         } else {
                             System.out.println(message);
@@ -156,7 +160,7 @@ public class UserMenu {
                     if (action.equals("checkoutBook")) {
                         Book book = this.repository.getBooks().get(Integer.parseInt(code));
                         if (!book.isChecked()) {
-                            book.checkout();
+                            book.checkout(this.user.getCode());
                             repeatMenu = false;
                         } else {
                             System.out.println(message);

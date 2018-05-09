@@ -11,7 +11,8 @@ public class BookTest {
     private String name = "Mindfullness";
     private String author = "Fulano de Tal";
     private String year = "2018";
-    private boolean checked = false;
+    private String checked = null;
+    private String code = "1234";
 
     @Before
     public void initialize() {
@@ -35,13 +36,13 @@ public class BookTest {
 
     @Test
     public void availability() {
-        assertEquals(checked, book.isChecked());
+        assertEquals(false, book.isChecked());
     }
 
     @Test
     public void checkoutBook() {
-        book.checkout();
-        assertEquals(true, book.isChecked()); }
+        book.checkout(code);
+        assertEquals(code, book.getCode()); }
 
     @Test
     public void returnBook() {

@@ -6,14 +6,14 @@ public class Movie {
     private String year;
     private String director;
     private int rating = 0;
-    private boolean isChecked = false;
+    private String checked;
 
-    public Movie(String name, String year, String director, int rating, boolean isChecked) {
+    public Movie(String name, String year, String director, int rating, String checked) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.rating = rating;
-        this.isChecked = isChecked;
+        this.checked = checked;
     }
 
     public String getName() {
@@ -33,16 +33,20 @@ public class Movie {
     }
 
     public boolean isChecked() {
-        return this.isChecked;
+        return this.checked != null;
     }
 
-    public void checkout() {
-        this.isChecked = true;
+    public void checkout(String code) {
+        this.checked = code;
         System.out.println("Thank you! Enjoy the movie.");
     }
 
     public void returnMovie() {
-        this.isChecked = false;
+        this.checked = null;
         System.out.println("Thank you for returning the movie.");
+    }
+
+    public String getCode() {
+        return this.checked;
     }
 }
